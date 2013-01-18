@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ issue.getTitle }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>{{ issue.getTitle }}</h1>
+    <p>Welcome to {{ issue.getTitle }}</p>
+  </body>
+</html>

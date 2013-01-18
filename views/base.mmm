@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ issue.title }}</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <a class="brand" href="#">Cafebabel development</a>
+            <div class="nav-collapse collapse">
+              <!--<p class="navbar-text pull-right">
+                Logged in as <a href="#" class="navbar-link">Username</a>
+              </p>-->
+              <ul class="nav">
+                <li class="active"><a href="/issues/">Issues</a></li>
+                <li><a href="/milestones/">Milestones</a></li>
+                <!--<li><a href="#contact">Contact</a></li>-->
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="container-fluid">
+        <div class="row-fluid">
+          {{> content}}        
+        </div><!--/row-->
+      </div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

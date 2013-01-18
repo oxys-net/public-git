@@ -1,0 +1,60 @@
+.sidebar-nav
+  padding 9px 0
+
+body>div.container-narrow
+  margin 0 auto
+  max-width 700px
+body>div.container  
+  &>div.container-fluid
+    margin-top 80px
+
+.table-striped 
+  tbody
+    tr.issue-closed, tr.issue-open
+      td
+        p
+          display inline
+          margin 0
+          padding 0
+    tr.issue-closed
+      td
+        p
+          text-decoration:line-through
+          color #999
+
+.progress
+  .bar        
+    line-height 22px  
+.progress-0 
+  .bar
+    text-indent 10px
+    color #666
+    text-shadow: 0 -1px 0 rgba(255,255,255,0.25);
+
+table.issues
+  margin-top 10px
+
+h5
+  margin-top 15px  
+
+.milestones
+  hr
+    margin-top 30px
+    margin-bottom 10px
+  hr:last-child
+    display none
+  &>div
+    position relative
+    .progress
+      position absolute
+      left 26%
+      right 0
+      top 20px
+  h3
+    float left
+    width 25%
+  p
+    clear both
+  .btn-issues
+    margin-bottom 10px
+    margin-top -10px

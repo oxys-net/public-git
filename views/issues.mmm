@@ -1,0 +1,23 @@
+        <div class="span12">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#">Open issues</a>
+            </li>
+            <li><a href="#">Closed issues</a></li>
+          </ul>
+          <table class="table table-striped table-bordered">
+            {{#issues}}
+              <tr class="issue-{{state}}">
+                <td>#{{number}}</td>
+                <td rel="popover" data-content="{{body}}">
+                  <p>{{title}}</p>
+                  {{#labels}}
+                     <span class="label" style="background-color:#{{ color }};">{{name}}</span>
+                  {{/labels}}                  
+                  <small class="pull-right muted">{{milestone.title}}</small>
+                </td>
+              </tr>
+            {{/issues}}
+          </table>
+            
+        </div><!--/span-->
