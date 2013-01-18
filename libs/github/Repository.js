@@ -78,7 +78,22 @@ qx.Class.define("Repository", {
       },this));
       githubConnexion.issues.repoIssues({
           user:this.__reposUser,
-          repo:this.__reposName
+          repo:this.__reposName,
+	  state:'open',
+          labels:'public'
+        }, qx.lang.Function.bind(function(err,result) {
+          var list = []
+          for (var i=0,l=result.length;i<l;i++) {
+            var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
+            list.push(tmp);
+          }
+          this.setIssues(list);
+      },this));
+      githubConnexion.issues.repoIssues({
+          user:this.__reposUser,
+          repo:this.__reposName,
+	  state:'closed',
+          labels:'public'
         }, qx.lang.Function.bind(function(err,result) {
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
