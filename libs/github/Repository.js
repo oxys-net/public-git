@@ -67,19 +67,30 @@ qx.Class.define("Repository", {
       },this));
       githubConnexion.issues.getAllMilestones({
           user:this.__reposUser,
-          repo:this.__reposName
+          repo:this.__reposName,
+          state:'open'
         }, qx.lang.Function.bind(function(err,result) {
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
             var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
             list.push(tmp);
           }
-          this.setMilestones(list);
+          githubConnexion.issues.getAllMilestones({
+              user:this.__reposUser,
+              repo:this.__reposName,
+              state:'closed'
+            }, qx.lang.Function.bind(function(err,result) {
+              for (var i=0,l=result.length;i<l;i++) {
+                var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
+                list.push(tmp);
+              }
+              this.setMilestones(list);
+          },this));
       },this));
       githubConnexion.issues.repoIssues({
           user:this.__reposUser,
           repo:this.__reposName,
-	  state:'open',
+          state:'open',
           labels:'public'
         }, qx.lang.Function.bind(function(err,result) {
           var list = []
@@ -87,21 +98,20 @@ qx.Class.define("Repository", {
             var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
             list.push(tmp);
           }
-          this.setIssues(list);
+          githubConnexion.issues.repoIssues({
+              user:this.__reposUser,
+              repo:this.__reposName,
+              state:'closed',
+              labels:'public'
+            }, qx.lang.Function.bind(function(err,result) {
+              for (var i=0,l=result.length;i<l;i++) {
+                var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
+                list.push(tmp);
+              }
+              this.setIssues(list);
+          },this));
       },this));
-      githubConnexion.issues.repoIssues({
-          user:this.__reposUser,
-          repo:this.__reposName,
-	  state:'closed',
-          labels:'public'
-        }, qx.lang.Function.bind(function(err,result) {
-          var list = []
-          for (var i=0,l=result.length;i<l;i++) {
-            var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
-            list.push(tmp);
-          }
-          this.setIssues(list);
-      },this));
+      
 
     }
   }

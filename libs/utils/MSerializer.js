@@ -12,15 +12,21 @@ qx.Mixin.define("MSerializer", {
       for(var i=0,l=keys.length;i<l;i++) {
         var key = keys[i];
         var value = properties[key];
-        propertyName = qx.lang.String.camelCase(key.replace('-','_'));
-        if (typeof(json[key]) !== "undefined") {
+        var propertyName = qx.lang.String.camelCase(key.replace('_','-'));
+        var jsonKey = qx.lang.String.hyphenate('$'+key).replace('$','').replace('-','_');
+        if (typeof(json[jsonKey]) !== "undefined") {
+
           var fName = "set"+qx.lang.String.firstUp(propertyName)+"FromJson";
           if (qx.lang.Type.isFunction(this[fName])) {
-            this[fName](json[key]);
+            this[fName](json[jsonKey]);
+
           } else {
-            qx.util.PropertyUtil.setInitValue(this, propertyName, json[key])
+            qx.util.PropertyUtil.setInitValue(this, propertyName, json[jsonKey])
           }
         }
+      }
+      if(this.__update !== undefined) {
+        this.__update()
       }
     },
     __convertValue : function(value) {

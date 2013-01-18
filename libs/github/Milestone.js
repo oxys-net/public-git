@@ -25,13 +25,13 @@ qx.Class.define("Milestone", {
         check : "String"
       },
     openIssues : {
-      init : 0,
+      init : null,
       check : "Number",
       apply: '_updateProgress'
 
     },
     closedIssues : {
-      init: 0,
+      init: null,
       check : "Number",
       apply: '_updateProgress'
     },
@@ -46,11 +46,16 @@ qx.Class.define("Milestone", {
     },
     _updateProgress: function() {
       total = this.getClosedIssues()+this.getOpenIssues();
+      
       if (total == 0) {
         this.setProgress(100);
       } else {
+        console.log(this.getClosedIssues(),total)
         this.setProgress( parseInt(this.getClosedIssues()/total*100));
       }
+    },
+    __update : function() {
+      this._updateProgress();
     }
   }
 });
