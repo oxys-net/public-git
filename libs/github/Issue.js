@@ -65,6 +65,9 @@ qx.Class.define("Issue", {
     setLabelsFromJson : function(json) {
       var list = [];
       for(var i=0,l=json.length;i<l;i++) {
+        if (json[i].name == 'public') {
+              continue;
+        }
         var obj = Label.objects.getOrCreate(json[i].url,json[i]);
         list.push(obj);
       }

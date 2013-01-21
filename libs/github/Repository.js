@@ -64,6 +64,9 @@ qx.Class.define("Repository", {
           }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
+            if (result[i].name == 'public') {
+              continue;
+            }
             var tmp = Label.objects.getOrCreate(result[i].url,result[i])
             list.push(tmp);
           }
