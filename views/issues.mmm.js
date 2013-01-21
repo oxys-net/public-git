@@ -15,6 +15,10 @@ module.exports = function(context) {
 
   var issues = [];
   for (var i = 0, l = context.issues.length; i<l; i++) {
+    if (!context.issues[i].isPublic) {
+      continue;
+    }
+
     if (context.issues[i].state == state) {
       issues.push(context.issues[i])
     }

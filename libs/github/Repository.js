@@ -48,8 +48,8 @@ qx.Class.define("Repository", {
           type: "basic",
           username: this.__user,
           password: this.__password
-        });  
-      } 
+        });
+      }
       return this.__githubConnexion;
     },
     __refresh: function() {
@@ -105,8 +105,7 @@ qx.Class.define("Repository", {
       githubConnexion.issues.repoIssues({
           user:this.__reposUser,
           repo:this.__reposName,
-          state:'open',
-          labels:'public'
+          state:'open'
         }, qx.lang.Function.bind(function(err,result) {
           if(err) {
             console.log("Github error",err);
@@ -120,8 +119,7 @@ qx.Class.define("Repository", {
           githubConnexion.issues.repoIssues({
               user:this.__reposUser,
               repo:this.__reposName,
-              state:'closed',
-              labels:'public'
+              state:'closed'
             }, qx.lang.Function.bind(function(err,result) {
               if(err) {
                 console.log("Github error",err);
@@ -134,7 +132,7 @@ qx.Class.define("Repository", {
               this.setIssues(list);
           },this));
       },this));
-      
+
 
     }
   }

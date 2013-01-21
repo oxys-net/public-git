@@ -10,7 +10,7 @@ qx.Class.define("Issue", {
   construct: function() {
     this.base(arguments);
     this.constructor.objects.register(this);
-    
+
   },
   properties: {
     number : {
@@ -48,6 +48,10 @@ qx.Class.define("Issue", {
     updatedAt : {
        deferredInit : true,
         check : "Date"
+      },
+    isPublic : {
+       deferredInit : true,
+        check : "Boolean"
       }
   },
   members : {
@@ -56,23 +60,26 @@ qx.Class.define("Issue", {
     },
     setMilestoneFromJson : function(json) {
       if (json == null) {
-        this.initMilestone(null);  
+        this.initMilestone(null);
       } else {
         var obj = Milestone.objects.getOrCreate(json.number,json);
         this.initMilestone(obj);
       }
     },
     setLabelsFromJson : function(json) {
+      this.initIsPublic(false);
       var list = [];
       for(var i=0,l=json.length;i<l;i++) {
         if (json[i].name == 'public') {
-              continue;
+            this.initIsPublic(true);
+            continue;
         }
         var obj = Label.objects.getOrCreate(json[i].url,json[i]);
         list.push(obj);
       }
       this.initLabels(list);
     }
+
   }
 });
 module.exports = Issue;
