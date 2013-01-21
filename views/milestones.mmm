@@ -13,8 +13,8 @@
                   <div class="bar" style="width: {{progress}}%;">{{progress}}%</div>
                 </div>
                 <p>{{description}}</p>
-                <button type="button" class="pull-right btn btn-mini btn-issues" data-toggle="button">Show issues</button>
-                <table class="issues table table-striped table-hover table-bordered">
+                <button type="button" class="issues pull-right btn btn-mini btn-issues" data-toggle="button" data-target="{{htmlId}}-issues">Show issues</button>
+                <table class="issues table table-striped table-hover table-bordered" id="{{htmlId}}-issues">
                   {{#issues}}
                     <tr class="issue-{{state}}">
                       <td>#{{number}}</td>
