@@ -16,5 +16,7 @@ exports.issues = function(req, res){
 
 exports.milestones = function(req, res){
   res.locals.page = "milestones";
-  res.render('milestones',cafebabel.templateData());
+  var data = cafebabel.templateData()
+  data.request = req;
+  res.render('milestones',data);
 };

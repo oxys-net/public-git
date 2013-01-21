@@ -1,9 +1,11 @@
         <div class="span12">
           <ul class="nav nav-tabs">
-            <li class="active">
-              <a href="#">Open milestones</a>
+            <li {{#openMilestones}}class="active" {{/openMilestones}}>
+              <a href="/milestones/">Open milestones</a>
             </li>
-            <li><a href="#">Closed milestones</a></li>
+            <li {{^openMilestones}}class="active" {{/openMilestones}}>
+              <a href="/milestones/?state=closed">Closed milestones</a>
+            </li>
           </ul>
           <section class="milestones unstyled">
             {{#milestones}}

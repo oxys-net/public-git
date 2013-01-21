@@ -16,6 +16,10 @@ qx.Class.define("Milestone", {
       deferredInit : true,
       check : "Number",
         },
+    state : {
+       deferredInit : true,
+        check : [ "open", "closed"]
+      },
     title : {
         deferredInit : true,
         check : "String"
