@@ -1,3 +1,13 @@
+
+clearfix()
+  &:before
+  &:after
+    content: ""
+    display: table
+  &:after
+    clear: both
+  zoom: 1 if support-for-ie
+
 .sidebar-nav
   padding 9px 0
 
@@ -44,19 +54,24 @@ h5
   hr:last-child
     display none
   &>div
+    clearfix()
     position relative
     .progress
       position absolute
       left 26%
       right 0
       top 20px
+    table
+      margin-bottom 0px
   h3
     float left
     width 25%
   p
     clear both
   .btn-issues
-    margin-bottom 10px
+    margin-bottom 0px
     margin-top -10px
+    &.active
+      margin-bottom 10px
   table.issues
     display none
