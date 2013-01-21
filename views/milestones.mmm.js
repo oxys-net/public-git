@@ -17,7 +17,7 @@ module.exports = function(context) {
     // populate issues
     context.milestones[i].issues = [];
     for (var j = 0, m = context.issues.length;j<m;j++) {
-      if(context.issues[j].milestone.number == context.milestones[i].number && context.issues[j].isPublic) {
+      if(context.issues[j].milestone != null && context.issues[j].milestone.number == context.milestones[i].number && context.issues[j].isPublic) {
         context.milestones[i].issues.push(context.issues[j]);
       }
     }
