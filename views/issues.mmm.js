@@ -1,7 +1,6 @@
 var filterIssues = function (state) {
   var templateData = cafebabel.templateData();
   var issues = [];
-
   templateData.issues = issues;
   return templateData;
 }
