@@ -9,6 +9,7 @@ exports.issues = function(req, res){
   res.locals.page = "issues";
   var data = cafebabel.templateData()
   data.request = req;
+  data.pageIssues = true;
   res.render('issues', data);
 };
 
@@ -18,5 +19,6 @@ exports.milestones = function(req, res){
   res.locals.page = "milestones";
   var data = cafebabel.templateData()
   data.request = req;
+  data.pageMilestones = true;
   res.render('milestones',data);
 };
