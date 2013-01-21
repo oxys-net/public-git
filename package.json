@@ -9,6 +9,7 @@
     "hjs": "*",
     "stylus": "*",
     "qooxdoo":"*",
-    "mmm":"*"
+    "mmm":"*",
+    "nconf":"*"
   }
 }

@@ -7,12 +7,18 @@ var express = require('express')
   , routes = require('./routes')
   , github = require('./routes/github')
   , http = require('http')
-  , path = require('path');
+  , path = require('path');  
 
 var app = express();
 
+
+
+var config = require("./config");
+
+
+
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', config.get('PORT'));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'mmm');
   app.set('layout', 'base');

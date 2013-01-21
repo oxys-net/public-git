@@ -1,5 +1,7 @@
-var Repository = require('../libs/github/Repository')
-var cafebabel = new Repository(process.env.GITHUB_USER,process.env.GITHUB_PASSWORD,process.env.GITHUB_REPOS);
+var Repository = require('../libs/github/Repository'),
+    config = require('../config');
+
+var cafebabel = new Repository(config.get('GITHUB_USER'),config.get('GITHUB_PASSWORD'),config.get('GITHUB_REPOS'));
 
 exports.issues = function(req, res){
   res.locals.page = "issues";
