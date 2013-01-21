@@ -58,6 +58,10 @@ qx.Class.define("Repository", {
           user:this.__reposUser,
           repo:this.__reposName
         }, qx.lang.Function.bind(function(err,result) {
+          if(err) {
+            console.log("Github error",err);
+            return;
+          }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
             var tmp = Label.objects.getOrCreate(result[i].url,result[i])
@@ -70,6 +74,10 @@ qx.Class.define("Repository", {
           repo:this.__reposName,
           state:'open'
         }, qx.lang.Function.bind(function(err,result) {
+          if(err) {
+            console.log("Github error",err);
+            return;
+          }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
             var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
@@ -80,6 +88,10 @@ qx.Class.define("Repository", {
               repo:this.__reposName,
               state:'closed'
             }, qx.lang.Function.bind(function(err,result) {
+              if(err) {
+                console.log("Github error",err);
+                return;
+              }
               for (var i=0,l=result.length;i<l;i++) {
                 var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
                 list.push(tmp);
@@ -93,6 +105,10 @@ qx.Class.define("Repository", {
           state:'open',
           labels:'public'
         }, qx.lang.Function.bind(function(err,result) {
+          if(err) {
+            console.log("Github error",err);
+            return;
+          }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
             var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
@@ -104,6 +120,10 @@ qx.Class.define("Repository", {
               state:'closed',
               labels:'public'
             }, qx.lang.Function.bind(function(err,result) {
+              if(err) {
+                console.log("Github error",err);
+                return;
+              }
               for (var i=0,l=result.length;i<l;i++) {
                 var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
                 list.push(tmp);
