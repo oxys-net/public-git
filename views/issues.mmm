@@ -1,9 +1,11 @@
         <div class="span12">
           <ul class="nav nav-tabs">
-            <li class="active">
-              <a href="#">Open issues</a>
+            <li {{#openIssues}}class="active" {{/openIssues}}>
+              <a href="/issues/">Open issues</a>
             </li>
-            <li><a href="#">Closed issues</a></li>
+            <li {{^openIssues}}class="active" {{/openIssues}}>
+              <a href="/issues/?state=closed">Closed issues</a>
+            </li>
           </ul>
           <table class="table table-striped table-bordered">
             {{#issues}}
@@ -13,11 +15,11 @@
                   <p>{{title}}</p>
                   {{#labels}}
                      <span class="label" style="background-color:#{{ color }};">{{name}}</span>
-                  {{/labels}}                  
+                  {{/labels}}
                   <small class="pull-right muted">{{milestone.title}}</small>
                 </td>
               </tr>
             {{/issues}}
           </table>
-            
+
         </div><!--/span-->
