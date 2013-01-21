@@ -50,7 +50,6 @@ qx.Class.define("Milestone", {
       if (total == 0) {
         this.setProgress(100);
       } else {
-        console.log(this.getClosedIssues(),total)
         this.setProgress( parseInt(this.getClosedIssues()/total*100));
       }
     },
