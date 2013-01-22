@@ -1,7 +1,7 @@
 function slugify(text) {
   text = text.toLowerCase();
-  text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, ' ');
-  text = text.replace(/\s/gi, "-");
+  text = text.replace(/[^-a-zA-Z0-9\s]+/ig, ' ');
+  text = text.replace(/[\s]+/gi, "-");
   return text;
 }
 
