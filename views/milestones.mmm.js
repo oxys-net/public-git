@@ -24,16 +24,18 @@ module.exports = function(context) {
     // populate issues
     context.milestones[i].issues = [];
     for (var j = 0, m = context.issues.length;j<m;j++) {
-      if(context.issues[j].milestone.number == context.milestones[i].number && context.issues[j].isPublic) {
+      if(context.issues[j].milestone != null && context.issues[j].milestone.number == context.milestones[i].number && context.issues[j].isPublic) {
         context.milestones[i].issues.push(context.issues[j]);
       }
     }
+
+    // define issues count
+    context.milestones[i].visibleIssues = context.milestones[i].issues.length;
 
     // define hidden issues count
     context.milestones[i].hiddenIssues = context.milestones[i].openIssues + context.milestones[i].closedIssues - context.milestones[i].issues.length;
 
     // define id for html
-
     context.milestones[i].htmlId = slugify(context.milestones[i].title);
 
     // set new data
