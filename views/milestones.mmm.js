@@ -1,3 +1,10 @@
+function slugify(text) {
+  text = text.toLowerCase();
+  text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, ' ');
+  text = text.replace(/\s/gi, "-");
+  return text;
+}
+
 module.exports = function(context) {
 
   var request = context.request;
@@ -26,7 +33,8 @@ module.exports = function(context) {
     context.milestones[i].hiddenIssues = context.milestones[i].openIssues + context.milestones[i].closedIssues - context.milestones[i].issues.length;
 
     // define id for html
-    context.milestones[i].htmlId = context.milestones[i].title.toLowerCase().replace(' ','-');
+
+    context.milestones[i].htmlId = slugify(context.milestones[i].title);
 
     // set new data
     milestones.push(context.milestones[i]);
