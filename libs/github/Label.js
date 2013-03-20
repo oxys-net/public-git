@@ -7,9 +7,9 @@ qx.Class.define("Label", {
   statics : {
     objects : new utils.Manager("Label")
   },
-  construct: function() {
+  construct: function(repos) {
     this.base(arguments);
-    this.constructor.objects.register(this);
+    this.constructor.objects.register(repos, this);
   },
   properties: {
     url : {

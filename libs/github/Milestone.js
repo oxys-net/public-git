@@ -7,9 +7,9 @@ qx.Class.define("Milestone", {
   statics : {
     objects : new utils.Manager("Milestone")
   },
-  construct: function() {
+  construct: function(repos) {
     this.base(arguments);
-    this.constructor.objects.register(this);
+    this.constructor.objects.register(repos, this);
   },
   properties: {
     number : {

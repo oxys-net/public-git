@@ -8,17 +8,22 @@ var qx = require('qooxdoo'),
 qx.Class.define("Repository", {
   extend : qx.core.Object,
   include : [ utils.MSerializer],
-  construct: function(user, password, repos) {
+  construct: function(user, password, repos, name) {
     this.__password = password;
     this.__user = user;
     this.__reposUser = repos.split('/')[0];
     this.__reposName = repos.split('/')[1];
+    this.setName(name);
     this.initLabels([]);
     this.initIssues([]);
     this.__refresh();
     setInterval( qx.lang.Function.bind(this.__refresh,this),10000);
   },
   properties: {
+    name: {
+      deferredInit : true,
+      check: "String"
+    },
     labels : {
         deferredInit : true,
         check : "Array"
@@ -37,6 +42,7 @@ qx.Class.define("Repository", {
     __user : null,
     __reposUser : null,
     __reposName : null,
+    __name : null,
     __githubConnexion : null,
     __getGithubConnexion : function() {
       if(this.__githubConnexion === null) {
@@ -67,7 +73,7 @@ qx.Class.define("Repository", {
             if (result[i].name == 'public') {
               continue;
             }
-            var tmp = Label.objects.getOrCreate(result[i].url,result[i])
+            var tmp = Label.objects.getOrCreate(this,result[i].url,result[i])
             list.push(tmp);
           }
           this.setLabels(list);
@@ -83,7 +89,7 @@ qx.Class.define("Repository", {
           }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
-            var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
+            var tmp = Milestone.objects.getOrCreate(this,result[i].number,result[i])
             list.push(tmp);
           }
           githubConnexion.issues.getAllMilestones({
@@ -96,7 +102,7 @@ qx.Class.define("Repository", {
                 return;
               }
               for (var i=0,l=result.length;i<l;i++) {
-                var tmp = Milestone.objects.getOrCreate(result[i].number,result[i])
+                var tmp = Milestone.objects.getOrCreate(this,result[i].number,result[i])
                 list.push(tmp);
               }
               this.setMilestones(list);
@@ -113,7 +119,7 @@ qx.Class.define("Repository", {
           }
           var list = []
           for (var i=0,l=result.length;i<l;i++) {
-            var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
+            var tmp = Issue.objects.getOrCreate(this,result[i].number,result[i])
             list.push(tmp);
           }
           githubConnexion.issues.repoIssues({
@@ -126,7 +132,7 @@ qx.Class.define("Repository", {
                 return;
               }
               for (var i=0,l=result.length;i<l;i++) {
-                var tmp = Issue.objects.getOrCreate(result[i].number,result[i])
+                var tmp = Issue.objects.getOrCreate(this,result[i].number,result[i])
                 list.push(tmp);
               }
               this.setIssues(list);

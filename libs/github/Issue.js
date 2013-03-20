@@ -7,9 +7,10 @@ qx.Class.define("Issue", {
   statics : {
     objects : new utils.Manager("Issue")
   },
-  construct: function() {
+  construct: function(repos) {
     this.base(arguments);
-    this.constructor.objects.register(this);
+    this.__repos = repos;
+    this.constructor.objects.register(repos, this);
 
   },
   properties: {
@@ -55,6 +56,7 @@ qx.Class.define("Issue", {
       }
   },
   members : {
+    __repos : null,
     getPk : function() {
       return this.getNumber();
     },
@@ -62,7 +64,7 @@ qx.Class.define("Issue", {
       if (json == null) {
         this.initMilestone(null);
       } else {
-        var obj = Milestone.objects.getOrCreate(json.number,json);
+        var obj = Milestone.objects.getOrCreate(this.__repos,json.number,json);
         this.initMilestone(obj);
       }
     },
@@ -74,7 +76,7 @@ qx.Class.define("Issue", {
             this.initIsPublic(true);
             continue;
         }
-        var obj = Label.objects.getOrCreate(json[i].url,json[i]);
+        var obj = Label.objects.getOrCreate(this.__repos,json[i].url,json[i]);
         list.push(obj);
       }
       this.initLabels(list);
